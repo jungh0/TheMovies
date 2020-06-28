@@ -33,6 +33,11 @@
                     type: 'get',
                     success: function (data) {
                         //console.log(data);
+                        $("#api-back").css(
+                            "background-image",
+                            "url('https://image.tmdb.org/t/p/original/" + data.results[0].backdrop_path + "')"
+                        );
+                        $("#api-back").css("background-size", "100%");
                         for (var i = 0; i < data.results.length; i++) {
                             if (!data.results[i].poster_path) {
                                 continue;
@@ -156,35 +161,42 @@
         </header>
 
         <main role="main">
-            <section class="jumbotron text-center">
+            <section id="api-back" class="jumbotron text-center">
                 <div class="container">
-                    <h1 class="jumbotron-heading">Movie Popularity List</h1>
-                    <p class="lead text-muted">Used TheMovieDB</p>
-                    <p>
-                        <a href="https://www.themoviedb.org/" class="btn btn-primary my-2">themoviedb.org</a>
-                        <a href="./siginIn.html" class="btn btn-outline-secondary my-2">Sign In Page</a>
-                        <a href="./siginUp.html" class="btn btn-outline-secondary my-2">Sigin Up Page</a>
-                    </p>
-                    <br>
-                    <form class="form-signin" action="./search.html">
-                        <label for="inputEmail" class="sr-only">ID</label>
-                        <input
-                            type="text"
-                            id="search"
-                            name="search"
-                            class="form-control"
-                            placeholder="Search Keyword"
-                            required="required"
-                            autofocus="autofocus">
-                        <br>
-                        <button class="btn btn-lg btn-primary btn-block" type="submit">Search</button>
-                    </form>
-                    <br>
-                    <br>
-                    <nav aria-label="Page navigation">
-                        <ul id="main-page" class="pagination" style="justify-content: center;"></ul>
-                    </nav>
-                    <p class="lead text-muted">Click to go next page</p>
+                    <div class="card bg-light mb-3">
+                        <div class="card-header">
+                            <h4 class=" no-drag" style="margin: 5px;">Movie Popularity List</h4>
+                        </div>
+                        <div class="card-body" style="padding:30px">
+                            <p class="lead text-muted">Used TheMovieDB</p>
+                            <p>
+                                <a href="https://www.themoviedb.org/" class="btn btn-primary my-2">themoviedb.org</a>
+                                <a href="./siginIn.html" class="btn btn-outline-secondary my-2">Sign In Page</a>
+                                <a href="./siginUp.html" class="btn btn-outline-secondary my-2">Sigin Up Page</a>
+                            </p>
+                            <br>
+                            <form class="form-signin" action="./search.html">
+                                <label for="inputEmail" class="sr-only">ID</label>
+                                <input
+                                    type="text"
+                                    id="search"
+                                    name="search"
+                                    class="form-control"
+                                    placeholder="Search Keyword"
+                                    required="required"
+                                    autofocus="autofocus">
+                                <br>
+                                <button class="btn btn-lg btn-primary btn-block" type="submit">Search</button>
+                            </form>
+                            <br>
+                            <br>
+                            <nav aria-label="Page navigation">
+                                <ul id="main-page" class="pagination" style="justify-content: center;"></ul>
+                            </nav>
+                            <p class="lead text-muted">Click to go next page</p>
+                        </div>
+                    </div>
+
                 </div>
             </section>
 
