@@ -15,13 +15,14 @@
             href="https://getbootstrap.com/docs/4.0/examples/album/album.css"
             rel="stylesheet">
         <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+        <script src="./API_KEY.js"></script>
         <script src="./func.js"></script>
         <script>
             $(document).ready(function () {
                 var idd = getParam("id");
                 $.ajax({
-                    url: "https://api.themoviedb.org/3/movie/" + idd + "?api_key=c0e29ffa20977a559911bdb" +
-                            "6bd50b983&language=en-US",
+                    url: "https://api.themoviedb.org/3/movie/" + idd + "?api_key=" + API_KEY + 
+                            "&language=en-US",
                     dataType: "json",
                     type: 'get',
                     success: function (data) {

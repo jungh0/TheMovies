@@ -15,6 +15,7 @@
             href="https://getbootstrap.com/docs/4.0/examples/album/album.css"
             rel="stylesheet">
         <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+        <script src="./API_KEY.js"></script>
         <script src="./func.js"></script>
         <script>
             $(document).ready(function () {
@@ -26,9 +27,9 @@
                 doPage(page);
 
                 $.ajax({
-                    url: "https://api.themoviedb.org/3/discover/movie?api_key=c0e29ffa20977a559911bdb6bd" +
-                            "50b983&language=en-US&sort_by=popularity.desc&include_adult=false&include_vide" +
-                            "o=false&page=" + page,
+                    url: "https://api.themoviedb.org/3/discover/movie?api_key=" + API_KEY + "&language=e" +
+                            "n-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=" +
+                            page,
                     dataType: "json",
                     type: 'get',
                     success: function (data) {
