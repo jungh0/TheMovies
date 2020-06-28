@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>Movie List</title>
+        <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/album/">
+        <link
+            href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css"
+            rel="stylesheet">
+        <link
+            href="https://getbootstrap.com/docs/4.0/examples/album/album.css"
+            rel="stylesheet">
+        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                var page = getParam("search");
+                $("#search").val(page);
+                $.ajax({
+                    url: "https://api.themoviedb.org/3/search/movie?api_key=c0e29ffa20977a559911bdb6bd50" +
+                            "b983&page=1&query=" + page,
+                    dataType: "json",
+                    type: 'get',
+                    success: function (data) {
+                        console.log(data);
+                        for (var i = 0; i < data.results.length; i++) {
+                            if (!data.results[i].poster_path) {
+                                continue;
+                            }
+                            var url = "https://image.tmdb.org/t/p/original/" + data
+                                .results[i]
+                                .poster_path;
+                            var release_date = data
+                                .results[i]
+                                .release_date;
+                            var title = data
+                                .results[i]
+                                .title;
+                            var overview = data
+                                .results[i]
+                                .overview;
+                            var idd = data
+                                .results[i]
+                                .id;
+                            $('#main-row').append(
+                                `<div class="col-md-4">
+                                    <div class="card mb-4 box-shadow">
+                                        <img class="card-img-top" src="` +
+                                url +
+                                `""alt="Card image cap">
+                                        <div class="card-body">
+                                            <h5 class="card-text">` +
+                                title +
+                                `</h5>
+                                            <p class="card-text">` +
+                                overview +
+                                `</p>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="btn-group">
+                                                    <a href="./detail.html?id=` +
+                                idd +
+                                `" type="button" class="btn btn-sm btn-outline-secondary">View Detail</a>
+                                                </div>
+                                                <small class="text-muted">` +
+                                release_date +
+                                `</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>`
+                            );
+                            // console.log(data.results[i].poster_path);
+                        }
+                    },
+                    error: function (err) {}
+                });
+            });
+            function getParam(sname) {
+                var params = location
+                    .search
+                    .substr(location.search.indexOf("?") + 1);
+                var sval = "";
+                params = params.split("&");
+                for (var i = 0; i < params.length; i++) {
+                    temp = params[i].split("=");
+                    if ([temp[0]] == sname) {
+                        sval = temp[1];
+                    }
+                }
+                return sval;
+            }
+            function updateURLParameter(url, param, paramVal) {
+                var newAdditionalURL = "";
+                var tempArray = url.split("?");
+                var baseURL = tempArray[0];
+                var additionalURL = tempArray[1];
+                var temp = "";
+                if (additionalURL) {
+                    tempArray = additionalURL.split("&");
+                    for (var i = 0; i < tempArray.length; i++) {
+                        if (tempArray[i].split('=')[0] != param) {
+                            newAdditionalURL += temp + tempArray[i];
+                            temp = "&";
+                        }
+                    }
+                }
+                var rows_txt = temp + "" + param + "=" + paramVal;
+                return baseURL + "?" + newAdditionalURL + rows_txt;
+            }
+        </script>
+    </head>
+
+    <body>
+        <header>
+            <div class="navbar navbar-dark bg-dark box-shadow">
+                <div class="container d-flex justify-content-between">
+                    <a href="./index.html" class="navbar-brand d-flex align-items-center">
+                        <strong>Movie Popularity List</strong>
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <main role="main">
+            <section class="jumbotron text-center">
+                <div class="container">
+                    <h1 class="jumbotron-heading">Movie Popularity List</h1>
+                    <p class="lead text-muted">Used TheMovieDB</p>
+                    <p>
+                        <a href="https://www.themoviedb.org/" class="btn btn-primary my-2">themoviedb.org</a>
+                        <a href="./siginIn.html" class="btn btn-outline-secondary my-2">Sign In Page</a>
+                        <a href="./siginUp.html" class="btn btn-outline-secondary my-2">Sigin Up Page</a>
+                    </p>
+                    <br>
+                    <form class="form-signin" action="./search.html">
+                        <label for="inputEmail" class="sr-only">ID</label>
+                        <input
+                            type="text"
+                            id="search"
+                            name="search"
+                            class="form-control"
+                            placeholder="Search Keyword"
+                            required="required"
+                            autofocus="autofocus">
+                        <br>
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Search</button>
+                    </form>
+
+                </div>
+            </section>
+
+            <div class="album py-5 bg-light">
+                <div class="container">
+                    <div id="main-row" class="row"></div>
+                </div>
+            </div>
+
+        </main>
+
+        <footer class="text-muted">
+            <div class="container">
+                <p class="float-right">
+                    <a href="#">Back to top</a>
+                </p>
+                <p>ⓒ Jungh0 2020</p>
+            </div>
+        </footer>
+
+        <script src="https://getbootstrap.com/docs/4.0/assets/js/vendor/popper.min.js"></script>
+        <script src="https://getbootstrap.com/docs/4.0/dist/js/bootstrap.min.js"></script>
+        <script src="https://getbootstrap.com/docs/4.0/assets/js/vendor/holder.min.js"></script>
+    </body>
+</html>
