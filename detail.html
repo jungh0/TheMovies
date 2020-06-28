@@ -45,6 +45,18 @@
                         $("#api-en").text("Original Language : " + data.original_language);
                         $("#api-status").text("Status : " + data.status);
                         $("#api-homepage").attr("href", data.homepage);
+
+                        for (var i = 0; i < data.genres.length; i++) {
+                            $('#api-geres').append(
+                                `<span class="badge badge-info">` + data.genres[i].name + `</span> `
+                            );
+                        }
+                        for (var i = 0; i < data.production_countries.length; i++) {
+                            $('#api-geres').append(
+                                `<span class="badge badge-secondary">` + data.production_countries[i].name + `</span> `
+                            );
+                        }
+                        
                     },
                     error: function (err) {}
                 });
@@ -84,34 +96,40 @@
                         </div>
                         <div class="col-md-8">
                             <div class="card mb-4 box-shadow">
+
                                 <div class="card-body">
                                     <h3 id="api-title" class="card-text"></h3>
                                     <br>
+                                    
                                     <h5 id="api-title2" class="card-text"></h5>
+                                    
                                     <p id="api-content" class="card-text"></p>
 
+                                   
+                                    
                                     <div class="d-flex justify-content-between align-items-center">
+                                        <small class="text-muted"></small>
                                         <small id="api-date" class="text-muted"></small>
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center">
+                                        <small class="text-muted"></small>
                                         <small id="api-en" class="text-muted"></small>
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center">
+                                        <div id="api-geres">
+ 
+                                        </div>
+                                        <div id="api-contries">
+     
+                                        </div>
                                         <small id="api-status" class="text-muted"></small>
-                                    </div>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <small class="text-muted"></small>
-                                        <a id="api-homepage" href="" class="btn btn-outline-secondary my-2">HomePage</a>
                                     </div>
 
                                 </div>
                             </div>
-                            <div
-                                class="d-flex justify-content-between align-items-center"
-                                style="margin:20px">
-                                <small class="text-muted"></small>
-                                <a href="javascript:history.back();" class="btn btn-outline-secondary my-2">Go Back</a>
-                            </div>
+                            
+                            <a id="api-homepage" href="" class="btn btn-success my-2">HomePage</a>
+                            <a href="javascript:history.back();" class="btn btn-warning my-2">Go Back</a>
                         </div>
 
                     </div>
@@ -129,8 +147,5 @@
             </div>
         </footer>
 
-        <script src="https://getbootstrap.com/docs/4.0/assets/js/vendor/popper.min.js"></script>
-        <script src="https://getbootstrap.com/docs/4.0/dist/js/bootstrap.min.js"></script>
-        <script src="https://getbootstrap.com/docs/4.0/assets/js/vendor/holder.min.js"></script>
     </body>
 </html>
