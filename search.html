@@ -20,7 +20,7 @@
         <script>
             $(document).ready(function () {
                 var page = getParam("search");
-                $("#search").val(page);
+                $("#search").val(decodeURI(page));
                 $.ajax({
                     url: "https://api.themoviedb.org/3/search/movie?api_key=" + API_KEY +
                             "&page=1&query=" + page,
