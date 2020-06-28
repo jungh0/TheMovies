@@ -8,7 +8,6 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <title>Movie List</title>
-        <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/album/">
         <link
             href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css"
             rel="stylesheet">
@@ -53,10 +52,11 @@
                         }
                         for (var i = 0; i < data.production_countries.length; i++) {
                             $('#api-geres').append(
-                                `<span class="badge badge-secondary">` + data.production_countries[i].name + `</span> `
+                                `<span class="badge badge-secondary">` + data.production_countries[i].name +
+                                `</span> `
                             );
                         }
-                        
+
                     },
                     error: function (err) {}
                 });
@@ -100,13 +100,11 @@
                                 <div class="card-body">
                                     <h3 id="api-title" class="card-text"></h3>
                                     <br>
-                                    
+
                                     <h5 id="api-title2" class="card-text"></h5>
-                                    
+
                                     <p id="api-content" class="card-text"></p>
 
-                                   
-                                    
                                     <div class="d-flex justify-content-between align-items-center">
                                         <small class="text-muted"></small>
                                         <small id="api-date" class="text-muted"></small>
@@ -116,18 +114,14 @@
                                         <small id="api-en" class="text-muted"></small>
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <div id="api-geres">
- 
-                                        </div>
-                                        <div id="api-contries">
-     
-                                        </div>
+                                        <div id="api-geres"></div>
+                                        <div id="api-contries"></div>
                                         <small id="api-status" class="text-muted"></small>
                                     </div>
 
                                 </div>
                             </div>
-                            
+
                             <a id="api-homepage" href="" class="btn btn-success my-2">HomePage</a>
                             <a href="javascript:history.back();" class="btn btn-warning my-2">Go Back</a>
                         </div>
