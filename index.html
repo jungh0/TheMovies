@@ -16,6 +16,7 @@
             href="https://getbootstrap.com/docs/4.0/examples/album/album.css"
             rel="stylesheet">
         <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+        <script src="./func.js"></script>
         <script>
             $(document).ready(function () {
                 var page = getParam("page");
@@ -60,29 +61,29 @@
                                 .id;
                             $('#main-row').append(
                                 `<div class="col-md-4">
-                                    <div class="card mb-4 box-shadow">
-                                        <img class="card-img-top" src="` +
+                                <div class="card mb-4 box-shadow">
+                                <img class="card-img-top" src="` +
                                 url +
                                 `""alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-text">` +
+                                <div class="card-body">
+                                <h5 class="card-text" style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis; ">` +
                                 title +
                                 `</h5>
-                                            <p style="max-height:70px; overflow: hidden;" class="card-text">` +
-                                overview + 
+                                <p style="max-height:70px; overflow: hidden;" class="card-text">` +
+                                overview +
                                 `</p>
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <div class="btn-group">
-                                                    <a href="./detail.html?id=` +
+                                <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                <a href="./detail.html?id=` +
                                 idd +
                                 `" type="button" class="btn btn-sm btn-outline-secondary">View Detail</a>
-                                                </div>
-                                                <small class="text-muted">` +
+                                </div>
+                                <small class="text-muted">` +
                                 release_date +
                                 `</small>
-                                            </div>
-                                        </div>
-                                    </div>
+                                </div>
+                                </div>
+                                </div>
                                 </div>`
                             );
                             // console.log(data.results[i].poster_path);
@@ -91,62 +92,6 @@
                     error: function (err) {}
                 });
             });
-            function getParam(sname) {
-                var params = location
-                    .search
-                    .substr(location.search.indexOf("?") + 1);
-                var sval = "";
-                params = params.split("&");
-                for (var i = 0; i < params.length; i++) {
-                    temp = params[i].split("=");
-                    if ([temp[0]] == sname) {
-                        sval = temp[1];
-                    }
-                }
-                return sval;
-            }
-            function doPage(page) {
-                var pageHtml = "";
-                var b1 = page * 1 - 2;
-                var b2 = page * 1 + 3;
-                if (page == 1 || page == 2) {
-                    b1 = 1;
-                    b2 = 6;
-                }
-                for (var i = b1; i < page * 1; i++) {
-                    pageHtml += makePage(i, "");
-                }
-                pageHtml += makePage(page, "active");
-                for (var i = page * 1 + 1; i < b2; i++) {
-                    pageHtml += makePage(i, "");
-                }
-                //console.log(pageHtml);
-                $('#main-page').append(pageHtml);
-            }
-            function makePage(page, active) {
-                var href = window.location.href;
-                var href2 = updateURLParameter(href, "page", page);
-                return '<li class="page-item ' + active + '"><a class="page-link" href="' +
-                        href2 + '">' + page + '</a></li>';
-            }
-            function updateURLParameter(url, param, paramVal) {
-                var newAdditionalURL = "";
-                var tempArray = url.split("?");
-                var baseURL = tempArray[0];
-                var additionalURL = tempArray[1];
-                var temp = "";
-                if (additionalURL) {
-                    tempArray = additionalURL.split("&");
-                    for (var i = 0; i < tempArray.length; i++) {
-                        if (tempArray[i].split('=')[0] != param) {
-                            newAdditionalURL += temp + tempArray[i];
-                            temp = "&";
-                        }
-                    }
-                }
-                var rows_txt = temp + "" + param + "=" + paramVal;
-                return baseURL + "?" + newAdditionalURL + rows_txt;
-            }
         </script>
     </head>
 

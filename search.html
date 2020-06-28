@@ -16,6 +16,7 @@
             href="https://getbootstrap.com/docs/4.0/examples/album/album.css"
             rel="stylesheet">
         <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+        <script src="./func.js"></script>
         <script>
             $(document).ready(function () {
                 var page = getParam("search");
@@ -32,7 +33,7 @@
                             "url('https://image.tmdb.org/t/p/original/" + data.results[0].backdrop_path + "')"
                         );
                         $("#api-back").css("background-size", "cover");
-                        $("#api-back").css("background-repeat","no-repeat");
+                        $("#api-back").css("background-repeat", "no-repeat");
                         for (var i = 0; i < data.results.length; i++) {
                             if (!data.results[i].poster_path) {
                                 continue;
@@ -54,27 +55,27 @@
                                 .id;
                             $('#main-row').append(
                                 `<div class="col-md-4">
-                                    <div class="card mb-4 box-shadow">
-                                        <img class="card-img-top" src="` +
+                                <div class="card mb-4 box-shadow">
+                                <img class="card-img-top" src="` +
                                 url +
                                 `""alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-text">` +
+                                <div class="card-body">
+                                <h5 class="card-text" style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis; ">` +
                                 title +
                                 `</h5>
-                                            <p class="card-text"></p>
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <div class="btn-group">
-                                                    <a href="./detail.html?id=` +
+                                <p class="card-text"></p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                <a href="./detail.html?id=` +
                                 idd +
                                 `" type="button" class="btn btn-sm btn-outline-secondary">View Detail</a>
-                                                </div>
-                                                <small class="text-muted">` +
+                                </div>
+                                <small class="text-muted">` +
                                 release_date +
                                 `</small>
-                                            </div>
-                                        </div>
-                                    </div>
+                                </div>
+                                </div>
+                                </div>
                                 </div>`
                             );
                             // console.log(data.results[i].poster_path);
@@ -83,38 +84,6 @@
                     error: function (err) {}
                 });
             });
-            function getParam(sname) {
-                var params = location
-                    .search
-                    .substr(location.search.indexOf("?") + 1);
-                var sval = "";
-                params = params.split("&");
-                for (var i = 0; i < params.length; i++) {
-                    temp = params[i].split("=");
-                    if ([temp[0]] == sname) {
-                        sval = temp[1];
-                    }
-                }
-                return sval;
-            }
-            function updateURLParameter(url, param, paramVal) {
-                var newAdditionalURL = "";
-                var tempArray = url.split("?");
-                var baseURL = tempArray[0];
-                var additionalURL = tempArray[1];
-                var temp = "";
-                if (additionalURL) {
-                    tempArray = additionalURL.split("&");
-                    for (var i = 0; i < tempArray.length; i++) {
-                        if (tempArray[i].split('=')[0] != param) {
-                            newAdditionalURL += temp + tempArray[i];
-                            temp = "&";
-                        }
-                    }
-                }
-                var rows_txt = temp + "" + param + "=" + paramVal;
-                return baseURL + "?" + newAdditionalURL + rows_txt;
-            }
         </script>
     </head>
 

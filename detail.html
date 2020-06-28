@@ -16,65 +16,39 @@
             href="https://getbootstrap.com/docs/4.0/examples/album/album.css"
             rel="stylesheet">
         <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+        <script src="./func.js"></script>
         <script>
             $(document).ready(function () {
                 var idd = getParam("id");
                 $.ajax({
-                    url: "https://api.themoviedb.org/3/movie/" + idd + "?api_key=c0e29ffa20977a559911bdb6bd50" +
-                            "b983&language=en-US",
+                    url: "https://api.themoviedb.org/3/movie/" + idd + "?api_key=c0e29ffa20977a559911bdb" +
+                            "6bd50b983&language=en-US",
                     dataType: "json",
                     type: 'get',
                     success: function (data) {
                         console.log(data);
-                        $("#api-back").css("background-image","url('https://image.tmdb.org/t/p/original/" + data.backdrop_path + "')");
-                        $("#api-back").css("background-size","cover");
-                        $("#api-back").css("background-repeat","no-repeat");
+                        $("#api-back").css(
+                            "background-image",
+                            "url('https://image.tmdb.org/t/p/original/" + data.backdrop_path + "')"
+                        );
+                        $("#api-back").css("background-size", "cover");
+                        $("#api-back").css("background-repeat", "no-repeat");
 
-                        $("#api-img").attr("src","https://image.tmdb.org/t/p/original/" + data.poster_path);
+                        $("#api-img").attr(
+                            "src",
+                            "https://image.tmdb.org/t/p/original/" + data.poster_path
+                        );
                         $("#api-title").text(data.title);
                         $("#api-title2").text(data.tagline);
                         $("#api-content").text(data.overview);
                         $("#api-date").text("Release Date : " + data.release_date);
                         $("#api-en").text("Original Language : " + data.original_language);
                         $("#api-status").text("Status : " + data.status);
-                        $("#api-homepage").attr("href",data.homepage);
-
+                        $("#api-homepage").attr("href", data.homepage);
                     },
                     error: function (err) {}
                 });
             });
-            function getParam(sname) {
-                var params = location
-                    .search
-                    .substr(location.search.indexOf("?") + 1);
-                var sval = "";
-                params = params.split("&");
-                for (var i = 0; i < params.length; i++) {
-                    temp = params[i].split("=");
-                    if ([temp[0]] == sname) {
-                        sval = temp[1];
-                    }
-                }
-                return sval;
-            }
-            function updateURLParameter(url, param, paramVal) {
-                var newAdditionalURL = "";
-                var tempArray = url.split("?");
-                var baseURL = tempArray[0];
-                var additionalURL = tempArray[1];
-                var temp = "";
-                if (additionalURL) {
-                    tempArray = additionalURL.split("&");
-                    for (var i = 0; i < tempArray.length; i++) {
-                        if (tempArray[i].split('=')[0] != param) {
-                            newAdditionalURL += temp + tempArray[i];
-                            temp = "&";
-                        }
-                    }
-                }
-                var rows_txt = temp + "" + param + "=" + paramVal;
-                return baseURL + "?" + newAdditionalURL + rows_txt;
-            }
         </script>
     </head>
 
@@ -96,9 +70,7 @@
 
         <main role="main">
             <section id="api-back" class="jumbotron text-center" style="border-radius:0;">
-                <div class="container" style="height:200px">
-                   
-                </div>
+                <div class="container" style="height:200px"></div>
             </section>
 
             <div class="album py-5 bg-light">
@@ -106,13 +78,8 @@
                     <div id="main-row" class="row">
                         <div class="col-md-4">
                             <div class="card mb-4 box-shadow">
-                                <img
-                                    id="api-img"
-                                    class="card-img-top"
-                                    src=""
-                                    card="Card"
-                                    image="image">
-                               
+                                <img id="api-img" class="card-img-top" src="" card="Card" image="image">
+
                             </div>
                         </div>
                         <div class="col-md-8">
@@ -136,16 +103,17 @@
                                         <small class="text-muted"></small>
                                         <a id="api-homepage" href="" class="btn btn-outline-secondary my-2">HomePage</a>
                                     </div>
-                                    
+
                                 </div>
                             </div>
-                            <div class="d-flex justify-content-between align-items-center" style="margin:20px">
+                            <div
+                                class="d-flex justify-content-between align-items-center"
+                                style="margin:20px">
                                 <small class="text-muted"></small>
                                 <a href="javascript:history.back();" class="btn btn-outline-secondary my-2">Go Back</a>
                             </div>
                         </div>
 
-                       
                     </div>
                 </div>
             </div>
